@@ -69,3 +69,24 @@ func printMap(m map[string]string)  {
 	}
 }
 
+func deleteColor(colors map[string]string, key string)  {
+	delete(colors,key)
+}
+
+
+
+func Test_delete_from_map2(t *testing.T)  {
+	// 创建一个map
+	colors := createStringStringMap()
+    // 打印map
+	printMap(colors)
+    // 调用方法删除一个颜色
+	deleteColor(colors,"Blue")
+    // 打印map
+	printMap(colors)
+
+	// 可以看到Blue被删掉了。
+	// 在函数中传参map时，不会创建一个该map的一个副本
+	// 依然使用同一个map
+}
+
