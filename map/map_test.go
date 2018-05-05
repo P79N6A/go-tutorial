@@ -90,3 +90,33 @@ func Test_delete_from_map2(t *testing.T)  {
 	// 依然使用同一个map
 }
 
+
+
+
+
+//
+
+func Test_update_map(t *testing.T)  {
+	m := create_string_int_map()
+	updateMap(m)
+	printMap2(m)
+}
+
+func create_string_int_map() map[string]int {
+	m := map[string]int {
+		"tom"     : 10,
+		"jerry"   : 20,
+	}
+	return m
+}
+
+func updateMap(m map[string]int)  {
+	m["tom"] = 15
+}
+
+func printMap2(m map[string]int)  {
+	fmt.Println(m)
+}
+
+
+
