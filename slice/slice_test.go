@@ -56,6 +56,18 @@ func Test_test(t *testing.T)  {
 	fmt.Println(cap(s1))     // 6
 }
 
+func Test_test_3(t *testing.T)  {
+	s := []int{5, 7, 9}
+	x := append(s, 11)
+	y := append(s, 12)
+	fmt.Println(s,x,y)
+}
 
-
-
+func Test_test_2(t *testing.T)  {
+	s := []int{5}
+	s = append(s, 7)
+	s = append(s, 9)
+	x := append(s, 11)
+	y := append(s, 12)
+	fmt.Println(s, x, y)
+}

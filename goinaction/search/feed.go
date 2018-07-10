@@ -8,7 +8,7 @@ import (
 const dataFile = "goinaction/data/data.json"
 
 type Feed struct {
-	Name string `json:"site"`
+	Name string `json:"site"`    // `json:"site"`是go中的tag,描述了一些元数据
 	URI  string `json:"link"`
 	Type string `json:"type"`
 }

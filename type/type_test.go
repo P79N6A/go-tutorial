@@ -6,29 +6,29 @@ import (
 )
 
 // 定义一个struct，用于测试值传递和指针传递
-type T struct {
+type Student struct {
 	Name string
 	Age int
 }
 
-func (t T) M1() {
+func (t Student) M1() {
 	t.Name = "name1"
 }
 
-func (t *T) M2() {
+func (t *Student) M2() {
 	t.Name = "name2"
 }
 
-func updateName(t T) {
+func updateName(t Student) {
 	t.Name = "name1"
 }
 
-func updateName2(t *T) {
+func updateName2(t *Student) {
 	t.Name = "name2"
 }
 
-func Test_delete_from_map4(t *testing.T)  {
-	t1 := T{"leo",10}
+func Test_update_name(t *testing.T)  {
+	t1 := Student{"leo",10}
 	fmt.Println(t1.Name)     // 输出leo
 
 	t1.M1()
@@ -39,7 +39,7 @@ func Test_delete_from_map4(t *testing.T)  {
 }
 
 func Test_updateName2(t *testing.T)  {
-	t1 := T{"leo",10}
+	t1 := Student{"leo",10}
 	fmt.Println(t1.Name)     // 输出leo
 
 	updateName(t1)
