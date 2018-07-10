@@ -197,3 +197,46 @@ func Test_change_map(t *testing.T)  {
 	fmt.Println(m)
 }
 
+
+/////////////////////////////////////////
+// Slice Append
+/////////////////////////////////////////
+func Test_test(t *testing.T)  {
+	s := []int{1,2,3,4,5,6,7,8,9}
+
+	s1 := s[3:]
+	fmt.Println(s1)         // 4 5 6 7 8 9
+	fmt.Println(len(s1))    // 6
+	fmt.Println(cap(s1))    // 6
+
+	s = s[3:7]
+	fmt.Println(s)         // 4 5 6 7
+	fmt.Println(len(s))    // 4
+	fmt.Println(cap(s))    // 6
+
+	s = append(s,100)
+
+	fmt.Println(s)        // 4 5 6 7 100
+	fmt.Println(len(s))   // 5
+	fmt.Println(cap(s))   // 6
+
+	fmt.Println(s1)          // 4 5 6 7 100 9
+	fmt.Println(len(s1))     // 6
+	fmt.Println(cap(s1))     // 6
+}
+
+func Test_test_3(t *testing.T)  {
+	s := []int{5, 7, 9}
+	x := append(s, 11)
+	y := append(s, 12)
+	fmt.Println(s,x,y)
+}
+
+func Test_test_2(t *testing.T)  {
+	s := []int{5}
+	s = append(s, 7)
+	s = append(s, 9)
+	x := append(s, 11)
+	y := append(s, 12)
+	fmt.Println(s, x, y)
+}
