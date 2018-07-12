@@ -128,7 +128,32 @@ func Test_test_7(t *testing.T) {
 }
 
 
+func Test_test_8(t *testing.T) {
+	queue := make(chan int,3)
+	go func(ch chan<- int) {
+		time.Sleep(time.Second * 2)
+		fmt.Println("Player 1 finished")
+		ch <- 0
+	}(queue)
 
+	go func(ch chan<- int) {
+		time.Sleep(time.Second * 3)
+		fmt.Println("Player 2 finished")
+		ch <- 0
+	}(queue)
+
+	go func(ch chan<- int) {
+		time.Sleep(time.Second * 5)
+		fmt.Println("Player 3 finished")
+		ch <- 0
+	}(queue)
+
+	for i:= 0; i<3 ; i++{
+		<- queue
+	}
+
+	fmt.Println("All players finished")
+}
 
 
 
