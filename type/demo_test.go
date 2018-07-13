@@ -59,7 +59,7 @@ func Test_change_username_2(t *testing.T)  {
 
 	tom.ChangeUserName2("jerry")
 
-	println(tom.Name)        // jerry?
+	println(tom.Name)        // tom? jerry?
 }
 
 //////////////////////////////////////
@@ -94,6 +94,16 @@ func Test_change_age_2(t *testing.T)  {
 
 	println(tom.Age)        // tom
 }
+// Go中定义一个方法时，有两种方式:
+// 1. 方法接收者是一个值
+// 2. 方法接受者是一个指针
+
+// func (t  T) sayHello(name string) ====> func sayHello(t  T, name string)       // 传递一个T的副本
+// func (t *T) sayHello(name string) ====> func sayHello(t *T, name string)       // 传递一个T的指针
+
+
+
+
 
 
 ///////////////////////////////////////
@@ -119,8 +129,8 @@ func Test_change_age(t *testing.T)  {
 	var age int = 15
 	tom.ChangeUserAge3(age)
 
-	println(age)
-	println(tom.Age)        // tom
+	println(age)            // 15
+	println(tom.Age)        // 16
 }
 
 func Test_change_age2(t *testing.T)  {
@@ -133,9 +143,14 @@ func Test_change_age2(t *testing.T)  {
 
 	tom.ChangeUserage4(&age)
 
-	println(age)
-	println(tom.Age)        // tom
+	println(age)            // 16
+	println(tom.Age)        // 16
 }
+// Go中的方法传参，不像Java，基本类型都是传递一个副本，其余是一个引用
+// Go中是传递副本还是一个引用，就看是传递一个值，还是传递一个指针
+
+
+
 
 
 ////////////////////////////////
@@ -165,6 +180,11 @@ func Test_change_array2(t *testing.T)  {
 	fmt.Println(array)
 }
 
+
+
+
+
+
 //////////////////////////////////////////
 // Slice
 /////////////////////////////////////////
@@ -179,6 +199,11 @@ func Test_update_slice(t *testing.T)  {
 	updateSlice(slice)
 	fmt.Println(slice)
 }
+
+
+
+
+
 
 /////////////////////////////////////////
 // Map
@@ -196,40 +221,28 @@ func Test_change_map(t *testing.T)  {
 	updateMap(m)
 	fmt.Println(m)
 }
+// Go中有一种引用类型，引用类型传参时，和Java一样，把原始值传过去，不是引用
+// 引用类型有:
+// 1. slice
+// 2. map
+// 3. channel
+// 注意: array不是引用类型, 自定义的User类型也不是引用类型
 
 
+
+
+
+// Slice的大坑!!!!!!!!!!
 /////////////////////////////////////////
 // Slice Append
 /////////////////////////////////////////
-func Test_test(t *testing.T)  {
-	s := []int{1,2,3,4,5,6,7,8,9}
-
-	s1 := s[3:]
-	fmt.Println(s1)         // 4 5 6 7 8 9
-	fmt.Println(len(s1))    // 6
-	fmt.Println(cap(s1))    // 6
-
-	s = s[3:7]
-	fmt.Println(s)         // 4 5 6 7
-	fmt.Println(len(s))    // 4
-	fmt.Println(cap(s))    // 6
-
-	s = append(s,100)
-
-	fmt.Println(s)        // 4 5 6 7 100
-	fmt.Println(len(s))   // 5
-	fmt.Println(cap(s))   // 6
-
-	fmt.Println(s1)          // 4 5 6 7 100 9
-	fmt.Println(len(s1))     // 6
-	fmt.Println(cap(s1))     // 6
-}
-
 func Test_test_3(t *testing.T)  {
 	s := []int{5, 7, 9}
 	x := append(s, 11)
 	y := append(s, 12)
-	fmt.Println(s,x,y)
+	fmt.Println(s)
+	fmt.Println(x)
+	fmt.Println(y)
 }
 
 func Test_test_2(t *testing.T)  {
@@ -238,5 +251,9 @@ func Test_test_2(t *testing.T)  {
 	s = append(s, 9)
 	x := append(s, 11)
 	y := append(s, 12)
-	fmt.Println(s, x, y)
+	z := append(s, 13)
+	fmt.Println(s)
+	fmt.Println(x)
+	fmt.Println(y)
+	fmt.Println(z)
 }
