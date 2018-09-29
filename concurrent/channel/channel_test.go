@@ -65,4 +65,3 @@ func Test_test_8(t *testing.T) {
 
 	fmt.Println("All players finished")
 }
-

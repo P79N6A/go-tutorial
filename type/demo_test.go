@@ -102,10 +102,6 @@ func Test_change_age_2(t *testing.T)  {
 // func (t *T) sayHello(name string) ====> func sayHello(t *T, name string)       // 传递一个T的指针
 
 
-
-
-
-
 ///////////////////////////////////////
 // ChangeUserAge 修改入参age
 //////////////////////////////////////
@@ -219,7 +215,7 @@ func Test_change_map(t *testing.T)  {
 	}
 
 	updateMap(m)
-	fmt.Println(m)
+	fmt.Println(m)   // 10
 }
 // Go中有一种引用类型，引用类型传参时，和Java一样，把原始值传过去，不是引用
 // 引用类型有:
@@ -240,7 +236,7 @@ func Test_test_3(t *testing.T)  {
 	s := []int{5, 7, 9}
 	x := append(s, 11)
 	y := append(s, 12)
-	fmt.Println(s)
+	fmt.Println(s)   //
 	fmt.Println(x)
 	fmt.Println(y)
 }
