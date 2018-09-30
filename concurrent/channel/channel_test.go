@@ -87,3 +87,31 @@ func Test_test_range_chan_1(t *testing.T) {
 	time.Sleep(10 * time.Second)
 
 }
+
+func Test_test_select_chan_1(t *testing.T) {
+	var ch = make(chan string)
+	go func() {
+		for {
+			select {
+			case s := <-ch:
+				fmt.Println("Get[ ", s, " ] from chan")
+			default:
+			}
+			time.Sleep(1 * time.Second)
+		}
+	}()
+
+	ch <- "1"
+	time.Sleep(2 * time.Second)
+
+	ch <- "2"
+	time.Sleep(2 * time.Second)
+
+	ch <- "3"
+	time.Sleep(2 * time.Second)
+
+	close(ch)
+
+	time.Sleep(10 * time.Second)
+
+}
