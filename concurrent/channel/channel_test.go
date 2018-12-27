@@ -115,3 +115,13 @@ func Test_test_select_chan_1(t *testing.T) {
 	time.Sleep(10 * time.Second)
 
 }
+
+func Test_test_chan_capacity_length_1(t *testing.T) {
+	chan1 := make(chan string)    // 无缓冲的
+	chan2 := make(chan string, 1) // 有一个缓冲
+	chan3 := make(chan string, 2) // 有两个缓冲
+
+	fmt.Println(cap(chan1)) // 0
+	fmt.Println(cap(chan2)) // 1
+	fmt.Println(cap(chan3)) // 2
+}

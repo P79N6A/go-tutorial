@@ -2,37 +2,37 @@ package main
 
 import (
 	"context"
-	"testing"
-	"github.com/smallnest/rpcx/server"
+	"fmt"
 	"github.com/smallnest/rpcx/client"
+	"github.com/smallnest/rpcx/server"
 	"log"
+	"testing"
 )
 
-type Args struct{
+type Args struct {
 	A int
 	B int
 }
 
-type Reply struct{
+type Reply struct {
 	C int
 }
 
 type Arith int
 
-func (t *Arith) Mul(ctx context.Context, args *Args, reply *Reply) error{
+func (t *Arith) Mul(ctx context.Context, args *Args, reply *Reply) error {
 	reply.C = args.A * args.B
+	fmt.Println("call Mul: ", args.A, " * ", args.B, " = ", reply.C)
 	return nil
 }
 
-func Test_server(t *testing.T){
+func Test_server(t *testing.T) {
 	s := server.NewServer()
-	s.RegisterName("Arith",new(Arith),"")
+	s.RegisterName("Arith", new(Arith), "")
 	s.Serve("tcp", ":8972")
 }
 
-
-
-func Test_client(t *testing.T){
+func Test_client(t *testing.T) {
 	d := client.NewPeer2PeerDiscovery("tcp@"+"127.0.0.1:8972", "")
 
 	xclient := client.NewXClient("Arith", client.Failtry, client.RandomSelect, d, client.DefaultOption)
@@ -53,4 +53,3 @@ func Test_client(t *testing.T){
 
 	log.Printf("%d * %d = %d", args.A, args.B, reply.C)
 }
-

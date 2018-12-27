@@ -1,0 +1,63 @@
+syntax = "proto3";  //指定版本，必须要写（proto3、proto2）
+package proto;
+
+// 代表一个Dubbo，HSF的路由配置
+message FilterConfig{
+    string stat_prefix = 1;
+    string protocol_type = 2;
+    string serialization_type = 3;
+    repeated RouteConfig route_config = 4;
+}
+
+message RouteConfig{
+    string name = 1;
+    string interface = 2;
+    string version = 3;
+    string group = 4;
+    RouteConfigSpec spec = 5;
+    repeated RouteConfigRoute routes = 6;
+}
+
+message RouteConfigSpec{
+    string app_name = 1;
+    string write_mode = 2;
+    int32 route_idx = 3;
+}
+
+message RouteConfigRoute{
+    RouteConfigRouteMatch match = 1;
+    RouteConfigRouteRoute route = 2;
+}
+
+message RouteConfigRouteRoute{
+    string cluster = 1;
+}
+
+message RouteConfigRouteMatch{
+    RouteConfigRouteMatchMethod method = 1;
+    repeated HeaderMatch headers = 2;
+}
+
+message RouteConfigRouteMatchMethod{
+    string name = 1;
+    repeated ParameterMatch params_match = 2;
+}
+
+message ParameterMatch{
+    int32 index = 1;
+    string type = 2;
+    RangeMatch range_match = 3;
+    string prefix_match = 4;
+    string regex_match = 5;
+}
+
+message HeaderMatch{
+    string name = 1;
+    string exact_match = 2;
+    bool invert_match = 3;
+}
+
+message RangeMatch{
+    int32 start = 1;
+    int32 end = 2;
+}

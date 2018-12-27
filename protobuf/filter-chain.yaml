@@ -1,0 +1,57 @@
+filter_chains:
+  filters:
+  - name: envoy.filters.network.dubbo_proxy
+    config:
+      stat_prefix: dubbo_incomming_stats
+      protocol_type: Dubbo                      # 协议类型，HSF时 protocol_type: HSF
+      serialization_type: Hessian2
+      route_config:
+      - name: com.alibaba.middleware.hsf.HelloWorldService:1.0.0.TLS
+        interface: com.alibaba.middleware.hsf.HelloWorldService # Required
+        version: 1.0.0                          # Optional
+        group: HSF                              # Optional
+        spec:
+          app_name: xxx_business                # 应用名
+          write_mode: center_or_unit            # 单元或者中心
+          route_idx: 1                          # 如果write_mode是单元模式，route_idx标识userid在调用参数中位置
+        routes:
+        - match:
+            method:
+              name: add_method                  # 方法匹配
+              params_match:                     # 存在多条参数匹配规则时，按顺序作为选择优先级
+              - index: 0                        # 第一个参数的值位于100到200之间
+                type: int
+                range_match:                    # [start, end)
+                  start: 100
+                  end: 200
+              - index: 1                        # 第二个参数以user_id:为前缀
+                type: string
+                prefix_match: "user_id:"
+              - index: 2                        # 第三个参数为正则表达式匹配
+                type: string
+                regex_match: "0.[5-9]"
+            headers:
+            - name: custom1                     # 用户自定义字段
+              exact_match: 123
+            - name: custom2
+              exact_match: 456
+              invert_match: true                # Optional, 反转匹配，默认值false，此处即!=
+          route:
+            cluster: cluster_xxxx
+        - match:
+            method:
+              name: sub_method                    # 不带参数的方法匹配
+            headers:
+            - name: custom1                       # 用户自定义字段
+              exact_match: 123
+            - name: custom2
+              exact_match: 456
+              invert_match: true                  # Optional, 反转匹配，默认值false，此处即!=
+          route:
+            cluster: cluster_xxxx
+        - match:
+            method:                          # 预定义方法字段，即名称前以":"开头代表预定义
+              name: default
+            # default标识默认路由
+          route:
+            cluster: cluster_xxxx

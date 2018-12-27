@@ -1,9 +1,7 @@
-package cobra
+package main
 
 import "testing"
 
-func Test_cobra(t *testing.T){
-
-
+func Test_cobra(t *testing.T) {
 
 }

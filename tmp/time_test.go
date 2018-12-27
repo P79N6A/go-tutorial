@@ -2,18 +2,24 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"testing"
-	"time"
 )
 
 func Test_Ticker(t *testing.T) {
 
-	ticker := time.NewTicker(time.Second * 5)
-	go func() {
-		for t := range ticker.C {
-			fmt.Println("ticked at:", t, time.Now())
-		}
-	}()
+	//i, _ := strconv.Atoi("")
+	//fmt.Println(i)
 
-	time.Sleep(time.Second * 100)
+	i := strings.Index("outbound||xxx", "outbound")
+	fmt.Println(i)
+
+	//ticker := time.NewTicker(time.Second * 5)
+	//go func() {
+	//	for t := range ticker.C {
+	//		fmt.Println("ticked at:", t, time.Now())
+	//	}
+	//}()
+	//
+	//time.Sleep(time.Second * 100)
 }
